@@ -1,0 +1,64 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle; /* Center align table cells */
+        }
+    </style>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Doctors List</h1>
+         <a href="{% url 'dashboard' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
+        <a href="{% url 'doctor_create' %}" class="btn btn-primary mb-3">Add Doctor</a>
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>License ID</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.id }}</td>
+                        <td>{{ doctor.doc_name }}</td>
+                        <td>{{ doctor.doc_phone }}</td>
+                        <td>{{ doctor.license_number }}</td>
+                        <td>
+                            <img src="{{ doctor.doc_img.url }}" alt="{{ doctor.doc_name }}" style="width: 50px; height: auto;">
+                        </td>
+                        <td>
+                            <a href="{% url 'doctor_edit' doctor.id %}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'doctor_delete' doctor.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No doctors registered.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

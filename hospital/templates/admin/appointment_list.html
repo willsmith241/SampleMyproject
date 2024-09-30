@@ -1,0 +1,71 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+    <title>Appointment List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: rgba(240, 248, 255, 0.8); /* Light background with opacity */
+        }
+        .table-container {
+            background-color: rgba(255, 255, 255, 0.9); /* White background with some opacity */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            margin-top: 20px; /* Space above the table */
+        }
+        table {
+            width: 100%; /* Full width table */
+            margin-bottom: 20px; /* Space below table */
+        }
+        th, td {
+            text-align: center; /* Center text in table cells */
+        }
+        a {
+            display: block; /* Make link a block element */
+            margin-top: 20px; /* Space above the link */
+            text-align: center; /* Center align link */
+        }
+    </style>
+
+<body>
+    <div class="container mt-5">
+        <div class="table-container">
+            <h1 class="mb-4">Appointment List</h1>
+             <a href="{% url 'dashboard' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Place</th>
+                        <th>Phone</th>
+                        <th>Disease</th>
+                        <th>Days Since Onset</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.id }}</td>
+                        <td>{{ booking.patient_name }}</td>
+                        <td>{{ booking.patient_place }}</td>
+                        <td>{{ booking.patient_phone }}</td>
+                        <td>{{ booking.patient_dicese }}</td>
+                        <td>{{ booking.how_meny_day_start_your_dicese }}</td>
+                        <td><a href="{% url 'delete_appointment' booking.id %}"><button class="btn btn-danger">Delete</button></a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">No bookings available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'appointment_book'  %}" class="btn btn-primary">Book a New Appointment</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!-- templates/patient/patient_list.html -->
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+<title>Registered Patients</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<body>
+    <div class="container mt-5">
+        <h1>Registered Patients</h1>
+         <a href="{% url 'dashboard' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.username }}</td>
+                    <td>{{ patient.password }}</td>
+                    <td>
+                        <a href="{% url 'patient_delete' patient.id %}"><button class="btn btn-danger ">delete</button></a>
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No patients registered.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'patent_register' %}" class="btn btn-primary">Add New Patient</a>
+    </div>
+{% endblock %}

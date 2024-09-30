@@ -1,0 +1,43 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .modal {
+            display: block; /* Show the modal */
+            background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+        }
+        .modal-content {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+<body>
+<div class="modal fade show" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content p-4">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Payment for Appointment</h5>
+                <button type="button" class="close" aria-label="Close" onclick="window.location.href='/'">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You are about to book an appointment with<h4>{{ appointment.patient_name }}</h4> </p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" id="payment-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Pay Now</button>
+                </form>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

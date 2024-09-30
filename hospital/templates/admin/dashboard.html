@@ -1,0 +1,76 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .dashboard-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .dashboard-box h2 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .dashboard-box p {
+            font-size: 1.2em;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+    </style>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Admin Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="dashboard-box">
+                    <h2>{{ total_doctors }}</h2>
+                    <p>Total Doctors</p>
+                    <a href="{% url 'doctor_register_list' %}" class="btn btn-primary">View Doctors</a>
+                    <a href="{% url 'doctor_create' %}" class="btn btn-secondary">Add Doctor</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-box">
+                    <h2>{{ total_patients }}</h2>
+                    <p>Total Patients</p>
+                    <a href="{% url 'patient_list' %}" class="btn btn-primary">View Patients</a>
+                    <a href="{% url 'patent_register' %}" class="btn btn-secondary">Add Patient</a>
+                </div>
+            </div>
+              <div class="col-md-4">
+                <div class="dashboard-box">
+                    <h2>{{ total_bookings }}</h2>
+                    <p>Total Bookings</p>
+                    <a href="{% url 'booking_list' %}" class="btn btn-primary">View Patients</a>
+                    <a href="{% url 'appointment_book' %}" class="btn btn-secondary">Book Appointment</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center ">
+                <div class="dashboard-box">
+                    <h2>Quick Actions</h2>
+                    <a href="{% url 'doctor_create' %}" class="btn btn-success">Register Doctor</a>
+                    <a href="{% url 'appointment_book' %}" class="btn btn-success">Register Patient</a>
+                    <a href="{% url 'appointment_book' %}" class="btn btn-success">Book Appointment</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+

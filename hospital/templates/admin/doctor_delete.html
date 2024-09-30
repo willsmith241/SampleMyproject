@@ -1,0 +1,17 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+    <title>Confirm Deletion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<body>
+    <div class="container mt-5">
+        <h1>Confirm Deletion</h1>
+        <p>Are you sure you want to delete Dr</p>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Confirm delete">
+
+        </form>
+    </div>
+{% endblock %}

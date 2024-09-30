@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Make the card take full height */
+        }
+        .card-img-top {
+            width: 100%; /* Make the image take full width of the card */
+            height: 200px; /* Fixed height for the image */
+            object-fit: cover; /* Maintain aspect ratio and cover the area */
+        }
+        .card-body {
+            flex-grow: 1; /* Make the body grow to fill space */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <a href="/" class="btn btn-primary mb-3">Back to Home</a>
+        <h1 class="mb-4 text-center">Doctors</h1>
+        <div class="row">
+            {% for doctor in doctors %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow">
+                        <img src="{{ doctor.doc_img.url }}" class="card-img-top" alt="{{ doctor.doc_name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ doctor.doc_name }}</h5>
+                            <p class="card-text">Phone: {{ doctor.doc_phone }}</p>
+                            <p class="card-text">Licence ID: <a href="{{ doctor.license_number }}">{{ doctor.license_number }}</a></p>
+                            <a href="{% url 'appointment_book' %}" class="btn btn-success">Book Doctor Appointment</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

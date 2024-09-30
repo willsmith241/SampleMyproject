@@ -1,0 +1,69 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block content %}
+    <title>Doctor List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background for the body */
+        }
+        .table thead th {
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white; /* White text for the header */
+        }
+        .doctor-image {
+            width: 60px; /* Fixed width for the image */
+            height: 60px; /* Fixed height for the image */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+        .btn {
+            margin-top: 10px; /* Space above buttons */
+        }
+    </style>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Registered Doctors</h1>
+         <a href="{% url 'dashboard' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
+        <a href="{% url 'doctor_create' %}" class="btn btn-primary mb-3">Add Doctor</a>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>License ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.id }}</td>
+                        <td>
+                            <img src="{{ doctor.doc_img.url }}" alt="{{ doctor.doc_name }}" class="doctor-image rounded-circle">
+                        </td>
+                        <td>{{ doctor.doc_name }}</td>
+                        <td>{{ doctor.doc_phone }}</td>
+                        <td><a href="{{ doctor.license_number }}">{{ doctor.license_number }}</a></td>
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'delete_doctor' doctor.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No doctors registered.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
